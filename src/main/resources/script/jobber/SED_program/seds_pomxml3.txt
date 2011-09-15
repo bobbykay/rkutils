@@ -1,0 +1,45 @@
+# eks på bruk av sed-kommandoer i scriptfil: 
+#c:\aab\>sed -f seds_pomxml.txt -n < C:\a\robert2.txt C:\SVNwork\asko-netthandel\pom.xml > c:\a\data.txt
+#c:\aab\>sed -f seds_pomxml.txt -n < C:\TMP\xw\pom.xml > c:\a\data.txt
+/filename:/ {
+s/filename:\s*//
+s/$//
+s/.*/&%/
+x
+}
+/<dependency>/ {
+x
+s/%.*/%£/
+x
+}
+/<\/dependency>/ {
+x
+#s/.*/&¤/
+s/\n//g
+/£/ {
+s/£//
+x
+g
+s/%//
+p
+}
+x
+s/%.*/%/
+x
+}
+/<groupId>/ {
+s/\s*<groupId>\(.*\)<\/groupId>/;\1/
+H
+}
+/<artifactId>/ {
+s/\s*<artifactId>\(.*\)<\/artifactId>/;\1/
+H
+}
+/<version>/ {
+s/\s*<version>\(.*\)<\/version>/;\1/
+H
+}
+/<scope>/ {
+s/\s*<scope>\(.*\)<\/scope>/;\1/
+H
+}

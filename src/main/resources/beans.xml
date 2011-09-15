@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0//EN"
+	"http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+	
+<beans>
+	<bean id="generiskQueryDao" class="rkutils.repository.GeneriskQueryDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+
+	<import resource="dataSource.xml"/>
+		
+	<bean 
+		id="jdbcTemplate" 
+			class="org.springframework.jdbc.core.JdbcTemplate">		
+			<property name="dataSource" ref="dataSource"/>
+	</bean>	
+	<bean 
+		id="jdbcSqlPoi"
+			class="rkutils.JdbcSqlPoi">
+			<property name="generiskQueryDao" ref="generiskQueryDao"/>
+			<property name="sqlfilNavn" value="${sqlfilNavn}"/>
+			<property name="utfilNavn" value="${utfilNavn}"/>
+			<property name="xlutfilNavn" value="${xlutfilNavn}"/>			
+			 
+	</bean>
+	
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+        	<list>
+        		<value>classpath:db.properties</value>
+        		<value>classpath:app.properties</value>
+        	</list>
+		</property> 
+    </bean>
+	
+</beans>

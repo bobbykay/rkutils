@@ -1,0 +1,18 @@
+s/,/,\n/g
+#s/)/\n)/g
+s/\sand\s/\ AND\ /g
+s/.*[gG][rR][oO][uU][pP]\W*[bB][yY]\(.*\)/GGROUPBYY\ \1/
+s/\(\.*\)\W*GGROUPBYY\(.*\)/\n\1\nGROUP\ BY\n\2\n/
+s/.*[oO][rR][dD][eE][rR]\W*[bB][yY]\(.*\)/OORDERBYY\ \1/
+s/\(\.*\)\W*OORDERBYY\(.*\)/\n\1\nORDER\ BY\n\2\n/
+s/\s*[lL][eE][fF][tT]\s*[oO][uU][tT][eE][rR]\s*[jJ][oO][iI][nN]\s*/\ LEFT OUTER JOIN\n/
+s/\s*[rR][iI][gG][hH][tT]\s*[oO][uU][tT][eE][rR]\s*[jJ][oO][iI][nN]\s*/\ RIGHT OUTER JOIN\n/
+s/\(AND.*$\)/\1\n/
+s/[sS][eE][lL][eE][cC][tT]\s/\nSELECT\n/g
+s/[fF][rR][oO][mM]/\nFROM\n/g
+s/[wW][hH][eE][rR][eE]/\nWHERE\n/g
+s/\s\s*[oO][nN]\s*/\nON\n/g
+s/\s\s*[iI][nN]\s*/\nIN\n/g
+s/^[ \t]*// 
+s/[ \t]*$// 
+p

@@ -1,0 +1,171 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>rkutils</groupId>
+	<artifactId>rkutils</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>rkutils</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<alletester>true</alletester>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.1</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>classes12</artifactId>
+			<version>9.0.2.2.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache</groupId>
+			<artifactId>poi</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5</version>
+			<!-- scope>runtime</scope -->
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+		</dependency>
+		<!--
+			<dependency> <groupId>oracle</groupId>
+			<artifactId>oracle-connector-java</artifactId>
+			<version>5.1.5</version> </dependency>
+		-->
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>enkeltest</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>alletester</name>
+					<value>false</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>enkeltestexecution</id>
+								<phase>test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+								<configuration>
+									<includes>
+										<include>**/AppTest.java</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>alletester</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>alletester</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>alletesterexecution</id>
+								<phase>test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+								<configuration>
+									<includes>
+										<include>**/*Test.java</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<repositories>
+		<!--
+			<repository> <id>ngwiki-repository</id> <name>Norgesgruppen Maven 2
+			Repository</name> <url>http://ngwiki.joh.no/maven2</url>
+			</repository> <repository> <id>ibiblio-repository</id> <name>Ibiblio
+			Repository</name> <url>http://www.ibiblio.org/maven2</url>
+			</repository> <repository> <id>Maven Snapshots</id>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url> <snapshots>
+			<enabled>true</enabled> </snapshots> <releases>
+			<enabled>false</enabled> </releases> </repository>
+		-->
+	</repositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>ISO-8859-1</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/xAppTest.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<!--
+				<plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId> <executions>
+				<execution> <phase>test</phase> <goals> <goal>run</goal> </goals>
+				</execution> </executions> <configuration> <tasks> <property
+				name="compile_classpath" refid="maven.compile.classpath" />
+				<property name="runtime_classpath" refid="maven.runtime.classpath"
+				/> <property name="test_classpath" refid="maven.test.classpath" />
+				<property name="plugin_classpath" refid="maven.plugin.classpath" />
+
+				<echo message="compile classpath: ${compile_classpath}" /> <echo
+				message="runtime classpath: ${runtime_classpath}" /> <echo
+				message="test classpath: ${test_classpath}" /> <echo message="plugin
+				classpath: ${plugin_classpath}" /> </tasks> </configuration>
+				</plugin>
+			-->
+		</plugins>
+	</build>
+</project>
